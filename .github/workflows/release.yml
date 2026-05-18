@@ -68,6 +68,13 @@ jobs:
             exit 1
           }
 
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: Terax-portable-x64
+          path: Terax-portable-x64.exe
+          retention-days: 30
+
       - name: Upload portable EXE to release
         run: |
           gh release upload "Terax-${{ github.sha }}" "Terax-portable-x64.exe" --clobber
