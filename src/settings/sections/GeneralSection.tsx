@@ -23,7 +23,6 @@ import {
   setAutostart,
   setEditorTheme,
   setRestoreWindowState,
-  setShowHidden,
   setTerminalFontSize,
   setTerminalScrollback,
   setTerminalWebglEnabled,
@@ -59,7 +58,6 @@ export function GeneralSection() {
   const autostart = usePreferencesStore((s) => s.autostart);
   const restoreWindowState = usePreferencesStore((s) => s.restoreWindowState);
   const vimMode = usePreferencesStore((s) => s.vimMode);
-  const showHidden = usePreferencesStore((s) => s.showHidden);
   const terminalWebglEnabled = usePreferencesStore(
     (s) => s.terminalWebglEnabled,
   );
@@ -177,18 +175,27 @@ export function GeneralSection() {
         </SettingRow>
       </div>
 
-      <div className="flex flex-col gap-2">
-        <Label>文件浏览器</Label>
-        <SettingRow
-          title="显示隐藏文件"
-          description="在文件浏览器和搜索中包含以点开头的文件和文件夹（.env、.gitignore、.config）。"
-        >
-          <Switch
-            checked={showHidden}
-            onCheckedChange={(v) => void setShowHidden(v)}
-          />
-        </SettingRow>
-      </div>
+        <div className="flex flex-col gap-2">
+          <Label>启动</Label>
+          <SettingRow
+            title="登录时启动"
+            description="登录时自动打开 Terax。"
+          >
+            <Switch
+              checked={autostart}
+              onCheckedChange={(v) => void onToggleAutostart(v)}
+            />
+          </SettingRow>
+          <SettingRow
+            title="恢复窗口位置和大小"
+            description="重新打开主窗口时恢复到上次关闭时的位置。下次启动时生效。"
+          >
+            <Switch
+              checked={restoreWindowState}
+              onCheckedChange={(v) => void setRestoreWindowState(v)}
+            />
+          </SettingRow>
+        </div>
 
       <div className="flex flex-col gap-2">
         <Label>终端</Label>
@@ -304,10 +311,6 @@ export function GeneralSection() {
           <SettingRow
             title="登录时启动"
             description="登录时自动打开 Terax。"
-          >
-          <SettingRow
-            title="恢复窗口位置和大小"
-            description="重新打开主窗口时恢复到上次关闭时的位置。下次启动时生效。"
           >
             <Switch
               checked={autostart}
