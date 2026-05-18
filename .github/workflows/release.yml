@@ -49,13 +49,30 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tagName: ${{ github.ref_name }}
-          releaseName: "Terax ${{ github.ref_name }}"
+          tagName: Terax-${{ github.sha }}
+          releaseName: "Terax ${{ github.sha }}"
           releaseBody: "Portable ZIP package for Windows x64."
           releaseDraft: true
           prerelease: false
-          args: --target x86_64-pc-windows-msvc --bundles zip
+          args: --target x86_64-pc-windows-msvc
           tauriScript: pnpm tauri
+
+      - name: Extract exe from NSIS bundle
+        run: |
+          $exePath = Get-ChildItem -Path "src-tauri/target/x86_64-pc-windows-msvc/release/bundle/nsis" -Filter "*.exe" | Select-Object -First 1
+          if ($exePath) {
+            Write-Host "Found: $($exePath.FullName)"
+            Copy-Item $exePath.FullName -Destination "Terax-portable-x64.exe"
+          } else {
+            Write-Error "No .exe found in NSIS bundle directory"
+            exit 1
+          }
+
+      - name: Upload portable EXE to release
+        run: |
+          gh release upload "Terax-${{ github.sha }}" "Terax-portable-x64.exe" --clobber
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Commit updated Cargo.lock
         if: always()
