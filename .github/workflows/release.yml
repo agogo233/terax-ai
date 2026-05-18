@@ -2,8 +2,8 @@ name: Release
 
 on:
   push:
-    tags:
-      - "v*"
+    branches:
+      - main
   workflow_dispatch:
 
 jobs:
@@ -29,6 +29,10 @@ jobs:
         with:
           targets: x86_64-pc-windows-msvc
 
+      - name: Generate Cargo.lock
+        working-directory: ./src-tauri
+        run: cargo generate-lockfile
+
       - uses: swatinem/rust-cache@v2
         with:
           workspaces: ./src-tauri -> target
@@ -37,9 +41,9 @@ jobs:
       - name: Install frontend dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Regenerate Cargo.lock (removed updater dependency)
+      - name: Update Cargo.lock before build
         working-directory: ./src-tauri
-        run: cargo generate-lockfile
+        run: cargo update --workspace
 
       - uses: tauri-apps/tauri-action@v0
         env:
@@ -52,3 +56,12 @@ jobs:
           prerelease: false
           args: --target x86_64-pc-windows-msvc --bundles zip
           tauriScript: pnpm tauri
+
+      - name: Commit updated Cargo.lock
+        if: always()
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add src-tauri/Cargo.lock
+          git commit -m "chore: update Cargo.lock" || echo "No changes to commit"
+          git push
