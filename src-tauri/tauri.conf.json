@@ -29,7 +29,9 @@
   },
   "bundle": {
     "active": true,
-    "targets": ["archive"],
+    "targets": {
+      "windows": ["zip"]
+    },
     "createUpdaterArtifacts": false,
     "icon": [
       "icons/32x32.png",
