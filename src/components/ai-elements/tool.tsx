@@ -33,23 +33,23 @@ import { isValidElement, memo, useState } from "react";
 export type ToolPart = ToolUIPart | DynamicToolUIPart;
 
 const TOOL_META: Record<string, { label: string; icon: typeof File01Icon }> = {
-  read_file: { label: "Read", icon: File01Icon },
-  list_directory: { label: "List", icon: FolderOpenIcon },
-  write_file: { label: "Write", icon: FilePlusIcon },
-  create_directory: { label: "Create dir", icon: FolderAddIcon },
-  edit: { label: "Edit", icon: FileEditIcon },
-  multi_edit: { label: "Edit", icon: Edit02Icon },
-  bash_run: { label: "Run", icon: TerminalIcon },
-  bash_background: { label: "Spawn", icon: TerminalIcon },
-  bash_logs: { label: "Logs", icon: TerminalIcon },
-  bash_list: { label: "Jobs", icon: TerminalIcon },
-  bash_kill: { label: "Kill", icon: TerminalIcon },
-  grep: { label: "Search", icon: GlobalSearchIcon },
-  glob: { label: "Glob", icon: Folder01Icon },
-  suggest_command: { label: "Suggest", icon: SparklesIcon },
-  open_preview: { label: "Preview", icon: EyeIcon },
-  run_subagent: { label: "Subagent", icon: RobotIcon },
-  todo_write: { label: "Todos", icon: CheckListIcon },
+  read_file: { label: "读取", icon: File01Icon },
+  list_directory: { label: "列出", icon: FolderOpenIcon },
+  write_file: { label: "写入", icon: FilePlusIcon },
+  create_directory: { label: "创建目录", icon: FolderAddIcon },
+  edit: { label: "编辑", icon: FileEditIcon },
+  multi_edit: { label: "编辑", icon: Edit02Icon },
+  bash_run: { label: "运行", icon: TerminalIcon },
+  bash_background: { label: "生成", icon: TerminalIcon },
+  bash_logs: { label: "日志", icon: TerminalIcon },
+  bash_list: { label: "任务", icon: TerminalIcon },
+  bash_kill: { label: "终止", icon: TerminalIcon },
+  grep: { label: "搜索", icon: GlobalSearchIcon },
+  glob: { label: "通配符", icon: Folder01Icon },
+  suggest_command: { label: "建议", icon: SparklesIcon },
+  open_preview: { label: "预览", icon: EyeIcon },
+  run_subagent: { label: "子代理", icon: RobotIcon },
+  todo_write: { label: "待办", icon: CheckListIcon },
 };
 
 const STATUS_DOT: Record<ToolPart["state"], string> = {
@@ -63,13 +63,13 @@ const STATUS_DOT: Record<ToolPart["state"], string> = {
 };
 
 const STATUS_LABEL: Record<ToolPart["state"], string> = {
-  "approval-requested": "awaiting approval",
-  "approval-responded": "responded",
-  "input-streaming": "preparing",
-  "input-available": "running",
-  "output-available": "done",
-  "output-denied": "denied",
-  "output-error": "error",
+  "approval-requested": "等待批准",
+  "approval-responded": "已响应",
+  "input-streaming": "准备中",
+  "input-available": "运行中",
+  "output-available": "完成",
+  "output-denied": "已拒绝",
+  "output-error": "错误",
 };
 
 function deriveSummary(toolName: string, input: unknown): string | null {
@@ -193,7 +193,7 @@ const ToolImpl = ({
         )}
         {isError && (
           <span className="shrink-0 text-[10px] font-medium text-destructive">
-            failed
+            失败
           </span>
         )}
       </CollapsibleTrigger>
@@ -242,7 +242,7 @@ function ToolInput({ toolName, input }: { toolName: string; input: unknown }) {
     return (
       <div className="space-y-1">
         <div className="text-[10px] font-medium text-muted-foreground">
-          Input
+          输入
         </div>
         {preview}
       </div>
@@ -325,7 +325,7 @@ function ToolOutput({
   if (errorText) {
     return (
       <div className="space-y-1">
-        <div className="text-[10px] font-medium text-destructive">Error</div>
+        <div className="text-[10px] font-medium text-destructive">错误</div>
         <div className="rounded bg-destructive/10 px-2 py-1.5 font-mono text-[11px] text-destructive whitespace-pre-wrap">
           {errorText}
         </div>
@@ -350,9 +350,9 @@ function ToolOutput({
 
   return (
     <div className="space-y-1">
-      <div className="text-[10px] font-medium text-muted-foreground">
-        Output
-      </div>
+        <div className="text-[10px] font-medium text-muted-foreground">
+          输出
+        </div>
       {body}
     </div>
   );
@@ -459,10 +459,10 @@ function renderToolOutput(toolName: string, output: unknown): ReactNode | null {
 
     if (hits.length === 0) {
       return (
-        <div className="text-[11px] italic text-muted-foreground">
-          no matches
-          {filesScanned != null ? ` · ${filesScanned} files scanned` : ""}
-        </div>
+      <div className="text-[11px] italic text-muted-foreground">
+        无匹配结果
+        {filesScanned != null ? ` · 已扫描 ${filesScanned} 个文件` : ""}
+      </div>
       );
     }
 
@@ -485,12 +485,12 @@ function renderToolOutput(toolName: string, output: unknown): ReactNode | null {
         </div>
         <div className="flex items-center justify-between text-[10px] text-muted-foreground">
           <span>
-            {hits.length} hit{hits.length === 1 ? "" : "s"}
-            {filesScanned != null ? ` · ${filesScanned} files` : ""}
+            {hits.length} 个匹配结果
+            {filesScanned != null ? ` · ${filesScanned} 个文件` : ""}
           </span>
           {truncated ? (
             <span className="rounded bg-amber-500/15 px-1.5 py-0.5 text-amber-700 dark:text-amber-400">
-              truncated
+              已截断
             </span>
           ) : null}
         </div>
@@ -506,9 +506,9 @@ function renderToolOutput(toolName: string, output: unknown): ReactNode | null {
         : [];
     if (matches.length === 0) {
       return (
-        <div className="text-[11px] italic text-muted-foreground">
-          no matches
-        </div>
+      <div className="text-[11px] italic text-muted-foreground">
+        无匹配结果
+      </div>
       );
     }
     return (
@@ -619,7 +619,7 @@ function BashRunOutput({ data }: { data: Record<string, unknown> }) {
             )}
             disabled={t.count === 0}
           >
-            {t.label}
+            {t.key === "stdout" ? "标准输出" : "标准错误"}
             {t.count > 0 ? (
               <span className="ml-1 text-muted-foreground">{t.count}</span>
             ) : null}
@@ -635,17 +635,17 @@ function BashRunOutput({ data }: { data: Record<string, unknown> }) {
                 : "bg-destructive/15 text-destructive",
             )}
           >
-            exit {exit}
+            退出码 {exit}
           </span>
         ) : null}
         {timedOut ? (
           <span className="rounded bg-amber-500/15 px-1.5 py-0.5 font-mono text-[10px] text-amber-700 dark:text-amber-400">
-            timed out
+            已超时
           </span>
         ) : null}
         {truncated ? (
           <span className="rounded bg-amber-500/15 px-1.5 py-0.5 font-mono text-[10px] text-amber-700 dark:text-amber-400">
-            truncated
+            已截断
           </span>
         ) : null}
       </div>
@@ -742,7 +742,9 @@ function SuggestCommandCard({
             size={12}
             strokeWidth={1.75}
           />
-          <span>{inserted ? "Inserted" : "Insert"}</span>
+          <span aria-label="插入到活动终端">
+            {inserted ? "已插入" : "插入"}
+          </span>
         </button>
       </div>
     </div>

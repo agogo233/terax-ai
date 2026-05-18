@@ -507,7 +507,7 @@ export function GitHistoryPane({ repoRoot, branch, onOpenCommitFile }: Props) {
               className="text-muted-foreground"
             />
             <span className="text-[11px] font-semibold uppercase tracking-[0.16em] text-muted-foreground/85">
-              Git Graph
+              Git 图谱
             </span>
             {branch ? (
               <div className="ml-1 inline-flex items-center gap-1 rounded-md border border-border/55 bg-background/70 px-1.5 py-0.5 text-[11px] font-medium leading-none text-foreground">
@@ -534,7 +534,7 @@ export function GitHistoryPane({ repoRoot, branch, onOpenCommitFile }: Props) {
               onChange={(event: ChangeEvent<HTMLInputElement>) =>
                 setSearchInput(event.target.value)
               }
-              placeholder="Search subject, author, sha…"
+              placeholder="搜索主题、作者、SHA…"
               className="h-7 rounded-md border-border/55 bg-background/85 pl-7 pr-7 text-[12px] placeholder:text-muted-foreground/70 focus-visible:border-border/80 focus-visible:ring-0"
             />
             {searchInput ? (
@@ -579,7 +579,7 @@ export function GitHistoryPane({ repoRoot, branch, onOpenCommitFile }: Props) {
               </Button>
             </TooltipTrigger>
             <TooltipContent side="bottom" className="text-[10.5px]">
-              Refresh
+              刷新
             </TooltipContent>
           </Tooltip>
         </header>
@@ -588,26 +588,26 @@ export function GitHistoryPane({ repoRoot, branch, onOpenCommitFile }: Props) {
           <CenterPlaceholder>
             <Spinner className="size-4" />
             <span className="text-[11.5px] text-muted-foreground">
-              Loading commits…
+              正在加载提交…
             </span>
           </CenterPlaceholder>
         ) : loadStatus === "error" && commits.length === 0 ? (
           <CenterPlaceholder>
             <div className="text-[13px] font-medium">
-              Could not load history
+              无法加载历史
             </div>
             <div className="max-w-md text-[11px] leading-relaxed text-muted-foreground">
-              {error ?? "Unknown error"}
+              {error ?? "未知错误"}
             </div>
             <Button size="sm" onClick={handleRefresh}>
-              Retry
+              重试
             </Button>
           </CenterPlaceholder>
         ) : commits.length === 0 ? (
           <CenterPlaceholder>
-            <div className="text-[13px] font-medium">No commits yet</div>
+            <div className="text-[13px] font-medium">暂无提交</div>
             <div className="max-w-md text-[11px] leading-relaxed text-muted-foreground">
-              This branch has no commits.
+              此分支暂无提交。
             </div>
           </CenterPlaceholder>
         ) : (
@@ -621,11 +621,11 @@ export function GitHistoryPane({ repoRoot, branch, onOpenCommitFile }: Props) {
             >
               <div />
               <div className="pl-px">SHA</div>
-              <div className="min-w-0">Subject</div>
+              <div className="min-w-0">主题</div>
               <div />
-              <div className="ml-2">Author</div>
-              <div className="text-right">Date</div>
-              <div className="text-right">Changes</div>
+              <div className="ml-2">作者</div>
+              <div className="text-right">日期</div>
+              <div className="text-right">更改</div>
             </div>
             <div
               ref={scrollRef}
@@ -671,17 +671,17 @@ export function GitHistoryPane({ repoRoot, branch, onOpenCommitFile }: Props) {
               {loadStatus === "more" ? (
                 <div className="flex items-center justify-center gap-2 py-3 text-[11px] text-muted-foreground">
                   <Spinner className="size-3" />
-                  Loading more…
+                  正在加载更多…
                 </div>
               ) : null}
               {endReached && !deferredSearch ? (
-                <div className="py-3 text-center text-[10.5px] text-muted-foreground/65">
-                  End of history
-                </div>
+                  <div className="py-3 text-center text-[10.5px] text-muted-foreground/65">
+                    历史到底
+                  </div>
               ) : null}
               {loadStatus === "error" && commits.length > 0 ? (
                 <div className="flex items-center justify-center gap-2 py-3 text-[11px] text-destructive">
-                  {error ?? "Failed to load more"}
+                  {error ?? "加载更多失败"}
                   <Button
                     size="xs"
                     variant="ghost"
@@ -844,7 +844,7 @@ const CommitRow = memo(function CommitRow({
         {commit.filesChanged > 0 ? (
           <span
             className="inline-flex items-center gap-1 text-muted-foreground/75"
-            title={`${commit.filesChanged} ${commit.filesChanged === 1 ? "file" : "files"} changed`}
+            title={`${commit.filesChanged} ${commit.filesChanged === 1 ? "个文件" : "个文件"}更改`}
           >
             <HugeiconsIcon
               icon={File02Icon}
@@ -950,7 +950,7 @@ function CommitDetail({
             }}
           >
             <HugeiconsIcon icon={Copy01Icon} size={11} strokeWidth={1.9} />
-            {copied ? "Copied" : "Copy SHA"}
+            {copied ? "已复制" : "复制 SHA"}
           </Button>
           {webUrl ? (
             <Button
@@ -1000,7 +1000,7 @@ function CommitFiles({
     return (
       <div className="flex items-center gap-2 px-3 py-3 text-[11px] text-muted-foreground">
         <Spinner className="size-3" />
-        Loading files…
+        正在加载文件…
       </div>
     );
   }
@@ -1014,7 +1014,7 @@ function CommitFiles({
           className="h-6 cursor-pointer text-[11px]"
           onClick={onRetry}
         >
-          Retry
+          重试
         </Button>
       </div>
     );
@@ -1022,14 +1022,14 @@ function CommitFiles({
   if (filesEntry.files.length === 0) {
     return (
       <div className="px-3 py-3 text-[11px] text-muted-foreground">
-        No file changes.
+        无文件更改。
       </div>
     );
   }
   return (
     <div className="flex min-h-0 flex-1 flex-col">
       <div className="flex shrink-0 items-center justify-between px-3 pb-1 pt-2 text-[10px] font-semibold uppercase tracking-[0.16em] text-muted-foreground/85">
-        <span>Files</span>
+        <span>文件</span>
         <span className="rounded-sm bg-muted/55 px-1 py-px text-[9.5px] tabular-nums text-muted-foreground/85 normal-case tracking-normal">
           {filesEntry.files.length}
         </span>

@@ -238,7 +238,7 @@ export const FileExplorer = forwardRef<FileExplorerHandle, Props>(
             className="text-muted-foreground"
           />
           <div className="text-xs text-muted-foreground">
-            No current directory
+            当前无目录
           </div>
         </div>
       );
@@ -386,8 +386,8 @@ export const FileExplorer = forwardRef<FileExplorerHandle, Props>(
             size="icon"
             className="size-6 text-muted-foreground hover:text-foreground"
             onClick={() => setIsSearchOpen((v) => !v)}
-            title="Search files"
-            aria-label="Search files"
+            title="搜索文件"
+            aria-label="搜索文件"
           >
             <HugeiconsIcon icon={Search01Icon} size={13} strokeWidth={2} />
           </Button>
@@ -397,7 +397,7 @@ export const FileExplorer = forwardRef<FileExplorerHandle, Props>(
             size="icon"
             className="size-6 text-muted-foreground hover:text-foreground"
             onClick={() => tree.beginCreate(rootPath, "file")}
-            title="New file"
+            title="新建文件"
           >
             <HugeiconsIcon icon={FileAddIcon} size={13} strokeWidth={2} />
           </Button>
@@ -406,7 +406,7 @@ export const FileExplorer = forwardRef<FileExplorerHandle, Props>(
             size="icon"
             className="size-6 text-muted-foreground hover:text-foreground"
             onClick={() => tree.beginCreate(rootPath, "dir")}
-            title="New folder"
+            title="新建文件夹"
           >
             <HugeiconsIcon icon={FolderAddIcon} size={13} strokeWidth={2} />
           </Button>
@@ -415,7 +415,7 @@ export const FileExplorer = forwardRef<FileExplorerHandle, Props>(
             size="icon"
             className="size-6 text-muted-foreground hover:text-foreground"
             onClick={() => tree.refresh(rootPath)}
-            title="Refresh"
+            title="刷新"
           >
             <HugeiconsIcon icon={Refresh01Icon} size={12} strokeWidth={2} />
           </Button>
@@ -457,7 +457,7 @@ export const FileExplorer = forwardRef<FileExplorerHandle, Props>(
                     <InlineInput
                       initial=""
                       placeholder={
-                        pendingAtRoot.kind === "dir" ? "New folder" : "New file"
+                        pendingAtRoot.kind === "dir" ? "新建文件夹" : "新建文件"
                       }
                       onCommit={tree.commitCreate}
                       onCancel={tree.cancelCreate}
@@ -466,7 +466,7 @@ export const FileExplorer = forwardRef<FileExplorerHandle, Props>(
                 ) : null}
                 {root?.status === "loading" && (
                   <div className="px-3 py-2 text-[11px] text-muted-foreground">
-                    Loading…
+                    加载中…
                   </div>
                 )}
                 {root?.status === "error" && (
@@ -517,40 +517,40 @@ export const FileExplorer = forwardRef<FileExplorerHandle, Props>(
                   className={COMPACT_ITEM}
                   onSelect={() => onRevealInTerminal(rootPath)}
                 >
-                  Open in Terminal
+                  在终端中打开
                 </ContextMenuItem>
               )}
               <ContextMenuItem
                 className={COMPACT_ITEM}
                 onSelect={() => void revealInFinder(rootPath)}
               >
-                Reveal in Finder
+                在访达中显示
               </ContextMenuItem>
               <ContextMenuSeparator />
               <ContextMenuItem
                 className={COMPACT_ITEM}
                 onSelect={() => tree.beginCreate(rootPath, "file")}
               >
-                New File
+                新建文件
               </ContextMenuItem>
               <ContextMenuItem
                 className={COMPACT_ITEM}
                 onSelect={() => tree.beginCreate(rootPath, "dir")}
               >
-                New Folder
+                新建文件夹
               </ContextMenuItem>
               <ContextMenuSeparator />
               <ContextMenuItem
                 className={COMPACT_ITEM}
                 onSelect={() => void copyToClipboard(rootPath)}
               >
-                Copy Path
+                复制路径
               </ContextMenuItem>
               <ContextMenuItem
                 className={COMPACT_ITEM}
                 onSelect={() => tree.refresh(rootPath)}
               >
-                Refresh
+                刷新
               </ContextMenuItem>
             </ContextMenuContent>
           </ContextMenu>

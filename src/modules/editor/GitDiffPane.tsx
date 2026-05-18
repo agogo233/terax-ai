@@ -250,11 +250,11 @@ export function GitDiffPane({ source, chipLabel, active }: Props) {
           </Badge>
           {isBinary ? (
             <Badge variant="secondary" className="text-[10px]">
-              Binary / patch fallback
+              二进制文件 / 补丁回退
             </Badge>
           ) : isTooLarge ? (
             <Badge variant="secondary" className="text-[10px]">
-              Large file / patch view
+              大文件 / 补丁视图
             </Badge>
           ) : null}
           <span
@@ -283,7 +283,7 @@ export function GitDiffPane({ source, chipLabel, active }: Props) {
         {state.kind === "loading" || state.kind === "idle" ? (
           <div className="flex h-full items-center justify-center gap-2 text-[11px] text-muted-foreground">
             <Spinner className="size-3" />
-            Loading diff…
+            正在加载差异…
           </div>
         ) : state.kind === "error" ? (
           <div className="flex h-full items-center justify-center px-6 text-center text-[11.5px] text-destructive">
@@ -292,7 +292,7 @@ export function GitDiffPane({ source, chipLabel, active }: Props) {
         ) : useFallback ? (
           <ScrollArea className="h-full">
             <pre className="min-h-full whitespace-pre-wrap wrap-break-word p-4 font-mono text-[12px] leading-relaxed text-muted-foreground">
-              {fallbackPatch || "Diff preview is not available for this file."}
+              {fallbackPatch || "此文件的差异预览不可用。"}
             </pre>
           </ScrollArea>
         ) : (

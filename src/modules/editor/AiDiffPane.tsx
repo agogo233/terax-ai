@@ -68,9 +68,9 @@ const DIFF_THEME = EditorView.theme({
 });
 
 const STATUS_LABEL: Record<AiDiffStatus, string> = {
-  pending: "Pending review",
-  approved: "Applied",
-  rejected: "Rejected",
+  pending: "待审核",
+  approved: "已应用",
+  rejected: "已拒绝",
 };
 
 const STATUS_BADGE: Record<
@@ -147,7 +147,7 @@ export function AiDiffPane({
           </Badge>
           {isNewFile ? (
             <span className="shrink-0 rounded-full border border-border/60 bg-accent/40 px-1.5 py-0.5 text-[10px] font-medium uppercase tracking-wide text-muted-foreground">
-              New file
+              新文件
             </span>
           ) : null}
           <span
@@ -174,7 +174,7 @@ export function AiDiffPane({
               className="h-7 gap-1.5"
             >
               <HugeiconsIcon icon={Tick02Icon} size={13} strokeWidth={2} />
-              Accept
+              接受
             </Button>
             <Button
               size="sm"
@@ -183,7 +183,7 @@ export function AiDiffPane({
               className="h-7 gap-1.5"
             >
               <HugeiconsIcon icon={Cancel01Icon} size={13} strokeWidth={2} />
-              Reject
+              拒绝
             </Button>
           </div>
         ) : null}

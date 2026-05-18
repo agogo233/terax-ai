@@ -54,15 +54,15 @@ export function NewEditorDialog({
   const submit = async () => {
     const trimmed = name.trim();
     if (!trimmed) {
-      setError("Name is required");
+      setError("名称不能为空");
       return;
     }
     if (trimmed.includes("..")) {
-      setError("Path must be relative");
+      setError("路径必须是相对路径");
       return;
     }
     if (!rootPath) {
-      setError("No workspace root");
+      setError("无工作区根目录");
       return;
     }
     const path = trimmed.startsWith("/")
@@ -83,11 +83,10 @@ export function NewEditorDialog({
         <DialogHeader>
           <DialogTitle className="flex gap-1.75">
             <HugeiconsIcon icon={File02Icon} size={16} strokeWidth={1.75} />
-            New file
+            新建文件
           </DialogTitle>
           <DialogDescription>
-            Filename (relative to workspace root). The extension determines the
-            language mode.
+            文件名（相对于工作区根目录）。扩展名决定语言模式。
           </DialogDescription>
         </DialogHeader>
         <Input
@@ -114,9 +113,9 @@ export function NewEditorDialog({
         )}
         <DialogFooter>
           <Button variant="ghost" onClick={() => onOpenChange(false)}>
-            Cancel
+            取消
           </Button>
-          <Button onClick={() => void submit()}>Create</Button>
+          <Button onClick={() => void submit()}>创建</Button>
         </DialogFooter>
       </DialogContent>
     </Dialog>

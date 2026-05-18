@@ -87,7 +87,7 @@ export const PreviewAddressBar = forwardRef<PreviewAddressBarHandle, Props>(
     const submit = () => {
       const next = normalizeUrl(draft);
       if (!next) {
-        setNotice("Enter a URL or pick a port preset.");
+        setNotice("请输入 URL 或选择端口预设。");
         return;
       }
       setNotice(null);
@@ -102,7 +102,7 @@ export const PreviewAddressBar = forwardRef<PreviewAddressBarHandle, Props>(
       const ok = await probeUrl(url);
       setCheckingPort(null);
       if (!ok) {
-        setNotice(`No server listening on :${port}.`);
+        setNotice(`: ${port} 上没有服务器监听。`);
         return;
       }
       setDraft(url);
@@ -117,7 +117,7 @@ export const PreviewAddressBar = forwardRef<PreviewAddressBarHandle, Props>(
           variant="ghost"
           size="icon"
           onClick={onReload}
-          title="Reload"
+          title="重新加载"
           className="size-7 shrink-0 rounded-md text-muted-foreground hover:bg-accent hover:text-foreground"
         >
           <HugeiconsIcon
@@ -132,7 +132,7 @@ export const PreviewAddressBar = forwardRef<PreviewAddressBarHandle, Props>(
               type="button"
               variant="ghost"
               size="sm"
-              title="Common dev-server ports"
+              title="常用开发服务器端口"
               className="h-7 shrink-0 gap-1 rounded-md px-1.5 text-[11px] text-muted-foreground hover:bg-accent hover:text-foreground"
             >
               <HugeiconsIcon
@@ -157,7 +157,7 @@ export const PreviewAddressBar = forwardRef<PreviewAddressBarHandle, Props>(
               >
                 <span className="flex-1">{p.label}</span>
                 <span className="text-xs text-muted-foreground">
-                  {checkingPort === p.port ? "checking…" : `:${p.port}`}
+                  {checkingPort === p.port ? "检查中…" : `:${p.port}`}
                 </span>
               </DropdownMenuItem>
             ))}
@@ -191,7 +191,7 @@ export const PreviewAddressBar = forwardRef<PreviewAddressBarHandle, Props>(
           onClick={() => {
             if (url) void openUrl(url).catch(console.error);
           }}
-          title="Open in system browser"
+          title="在系统浏览器中打开"
           className="size-7 shrink-0 rounded-md text-muted-foreground hover:bg-accent hover:text-foreground"
           disabled={!url}
         >
@@ -210,7 +210,7 @@ export const PreviewAddressBar = forwardRef<PreviewAddressBarHandle, Props>(
             onClick={() => setNotice(null)}
             className="ml-auto rounded px-1 text-[10px] opacity-80 hover:bg-accent hover:opacity-100"
           >
-            Dismiss
+            关闭
           </button>
         </div>
       ) : null}

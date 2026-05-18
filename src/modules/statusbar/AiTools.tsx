@@ -43,7 +43,7 @@ export function AiTools({ aiOpen, canSubmit, onOpenAi, onSubmit }: Props) {
           className="flex items-center gap-0.5"
         >
           <ModelSelector />
-          <ToolButton title="Voice input">
+          <ToolButton title="语音输入">
             <HugeiconsIcon icon={Mic01Icon} size={14} strokeWidth={1.75} />
           </ToolButton>
           <Button

@@ -133,11 +133,11 @@ export const SnippetCopyButton = ({
 
   return (
     <InputGroupButton
-      aria-label="Copy"
+      aria-label="复制"
       className={className}
       onClick={copyToClipboard}
       size="icon-sm"
-      title="Copy"
+      title="复制"
       {...props}
     >
       {children ?? <HugeiconsIcon icon={Icon} size={14} className="size-3.5" />}

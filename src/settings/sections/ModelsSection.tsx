@@ -71,7 +71,7 @@ export function ModelsSection() {
   };
 
   if (!keys) {
-    return <div className="text-[12px] text-muted-foreground">Loading…</div>;
+    return <div className="text-[12px] text-muted-foreground">加载中…</div>;
   }
 
   const cloudProviders = PROVIDERS.filter(
@@ -83,8 +83,8 @@ export function ModelsSection() {
   return (
     <div className="flex flex-col gap-7">
       <SectionHeader
-        title="Models"
-        description="Bring your own keys. They live in your OS keychain and are used only by Terax."
+        title="模型"
+        description="使用您自己的密钥。它们存储在您的操作系统密钥链中，仅由 Terax 使用。"
       />
 
       <DefaultModelBlock
@@ -98,7 +98,7 @@ export function ModelsSection() {
         <div className="flex items-baseline justify-between">
           <Label>Cloud providers</Label>
           <span className="text-[10.5px] text-muted-foreground">
-            {configuredCount} of {cloudProviders.length} configured
+            已配置 {configuredCount} / {cloudProviders.length}
           </span>
         </div>
         <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
@@ -149,7 +149,7 @@ function DefaultModelBlock({
 
   return (
     <div className="flex flex-col gap-2">
-      <Label>Default model</Label>
+        <Label>默认模型</Label>
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <Button
@@ -186,11 +186,11 @@ function DefaultModelBlock({
                   <div className="mb-0.5 flex items-center gap-1.5 px-2 text-[10px] font-medium tracking-wide text-muted-foreground uppercase">
                     <ProviderIcon provider={p.id} size={11} />
                     <span>{p.label}</span>
-                    {!hasKey ? (
-                      <span className="ml-auto text-[9.5px] normal-case tracking-normal text-muted-foreground/70">
-                        no key
-                      </span>
-                    ) : null}
+                      {!hasKey ? (
+                        <span className="ml-auto text-[9.5px] normal-case tracking-normal text-muted-foreground/70">
+                          无密钥
+                        </span>
+                      ) : null}
                   </div>
                   {models.map((mod) => {
                     const available = isAvailable(mod.id, p.id);
@@ -262,10 +262,9 @@ function LocalModelsBlock() {
   return (
     <div className="flex flex-col gap-3">
       <div className="flex flex-col gap-0.5">
-        <Label>Local — LM Studio</Label>
+        <Label>本地 — LM Studio</Label>
         <span className="text-[10.5px] leading-relaxed text-muted-foreground">
-          Run any GGUF model on your machine via LM Studio's HTTP server. Enable
-          the server in LM Studio → Developer tab.
+          通过 LM Studio 的 HTTP 服务器在您的机器上运行任何 GGUF 模型。在 LM Studio → Developer 选项卡中启用服务器。
         </span>
       </div>
 
@@ -290,7 +289,7 @@ function LocalModelsBlock() {
               disabled={!urlDraft.trim()}
               className="h-8 px-3 text-[11px]"
             >
-              Test
+              测试
             </Button>
             <Button
               size="sm"
@@ -298,7 +297,7 @@ function LocalModelsBlock() {
               disabled={!dirty}
               className="h-8 px-3 text-[11px]"
             >
-              Save
+              保存
             </Button>
           </div>
         </FieldRow>
@@ -321,8 +320,7 @@ function LocalModelsBlock() {
 
         {!modelId.trim() ? (
           <p className="text-[10.5px] leading-relaxed text-amber-600 dark:text-amber-400">
-            Enter the model id that's loaded in LM Studio — e.g. the one shown
-            on the server's <span className="font-mono">/v1/models</span> page.
+            输入在 LM Studio 中加载的模型 ID——例如服务器的 <span className="font-mono">/v1/models</span> 页面中显示的那个。
           </p>
         ) : null}
       </div>
@@ -376,10 +374,9 @@ function OpenAICompatibleBlock({
   return (
     <div className="flex flex-col gap-3">
       <div className="flex flex-col gap-0.5">
-        <Label>OpenAI-compatible endpoint</Label>
+        <Label>OpenAI 兼容端点</Label>
         <span className="text-[10.5px] leading-relaxed text-muted-foreground">
-          Any OpenAI-compatible HTTPS endpoint — vLLM, Z.AI, Fireworks, hosted
-          Ollama, etc.
+          任何 OpenAI 兼容的 HTTPS 端点——vLLM、Z.AI、Fireworks、托管的 Ollama 等。
         </span>
       </div>
 
@@ -404,7 +401,7 @@ function OpenAICompatibleBlock({
               disabled={!urlDraft.trim()}
               className="h-8 px-3 text-[11px]"
             >
-              Test
+              测试
             </Button>
             <Button
               size="sm"
@@ -412,7 +409,7 @@ function OpenAICompatibleBlock({
               disabled={!dirty}
               className="h-8 px-3 text-[11px]"
             >
-              Save
+              保存
             </Button>
           </div>
         </FieldRow>
@@ -437,13 +434,13 @@ function OpenAICompatibleBlock({
               <code className="flex-1 truncate rounded bg-muted/40 px-2 py-1 font-mono text-[11px] text-muted-foreground">
                 {`${compatKey.slice(0, 4)}${"•".repeat(8)}${compatKey.slice(-4)}`}
               </code>
-              <Button
-                size="icon"
-                variant="ghost"
-                onClick={() => void onClearKey()}
-                title="Remove"
-                className="size-7 text-muted-foreground hover:text-destructive"
-              >
+                <Button
+                  size="icon"
+                  variant="ghost"
+                  onClick={() => void onClearKey()}
+                  title="移除"
+                  className="size-7 text-muted-foreground hover:text-destructive"
+                >
                 <HugeiconsIcon
                   icon={Cancel01Icon}
                   size={12}
@@ -457,7 +454,7 @@ function OpenAICompatibleBlock({
                 type="password"
                 value={keyDraft}
                 onChange={(e) => setKeyDraft(e.target.value)}
-                placeholder="Optional — leave empty for unauthenticated endpoints"
+                placeholder="可选——未认证的端点请留空"
                 spellCheck={false}
                 className="h-8 flex-1 font-mono text-[11.5px]"
               />
@@ -472,7 +469,7 @@ function OpenAICompatibleBlock({
                 disabled={!keyDraft.trim()}
                 className="h-8 px-3 text-[11px]"
               >
-                Save
+                保存
               </Button>
             </div>
           )}
@@ -524,10 +521,9 @@ function AutocompleteBlock({ keys }: { keys: KeysMap }) {
     <div className="flex flex-col gap-3">
       <div className="flex items-start justify-between gap-3">
         <div className="flex flex-col gap-0.5">
-          <Label>Editor autocomplete</Label>
+          <Label>编辑器自动补全</Label>
           <span className="text-[10.5px] leading-relaxed text-muted-foreground">
-            Inline ghost-text suggestions in the code editor. Pick a fast model
-            (LPU/wafer-scale, local, or a small cloud tier).
+            代码编辑器中的内联幽灵文本建议。选择快速模型（LPU/晶圆级、本地或小型云 tier）。
           </span>
         </div>
         <Switch
@@ -605,8 +601,7 @@ function AutocompleteBlock({ keys }: { keys: KeysMap }) {
 
         {!hasKey ? (
           <span className="text-[10.5px] text-amber-500">
-            No API key configured for {getProvider(provider).label}. Add one
-            above.
+            未为 {getProvider(provider).label} 配置 API 密钥。请在上方添加。
           </span>
         ) : null}
       </div>
@@ -639,20 +634,20 @@ function StatusLine({
   if (status === "idle") return null;
   if (status === "testing") {
     return (
-      <span className="text-[10.5px] text-muted-foreground">Testing…</span>
+      <span className="text-[10.5px] text-muted-foreground">测试中…</span>
     );
   }
   if (status === "ok") {
     return (
       <span className="flex items-center gap-1 text-[10.5px] text-emerald-600 dark:text-emerald-400">
         <HugeiconsIcon icon={CheckmarkCircle02Icon} size={11} strokeWidth={2} />
-        Reachable — server responded.
+        可访问——服务器已响应。
       </span>
     );
   }
   return (
     <span className="text-[10.5px] text-destructive">
-      Could not reach the server.
+      无法连接到服务器。
     </span>
   );
 }

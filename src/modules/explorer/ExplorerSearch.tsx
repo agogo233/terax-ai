@@ -209,7 +209,7 @@ export const ExplorerSearch = forwardRef<ExplorerSearchHandle, Props>(function E
                 }
               }
             }}
-            placeholder="Search files…"
+            placeholder="搜索文件…"
             className="h-7 pr-7 pl-6.5 text-xs"
           />
           {query ? (

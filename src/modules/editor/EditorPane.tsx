@@ -232,7 +232,7 @@ export const EditorPane = forwardRef<EditorPaneHandle, Props>(
     if (doc.status === "loading") {
       return (
         <div className="flex h-full items-center justify-center text-xs text-muted-foreground">
-          Loading…
+          加载中…
         </div>
       );
     }
@@ -246,9 +246,9 @@ export const EditorPane = forwardRef<EditorPaneHandle, Props>(
     if (doc.status === "binary") {
       return (
         <div className="flex h-full flex-col items-center justify-center gap-1 px-6 text-center">
-          <div className="text-sm text-foreground">Binary file</div>
+          <div className="text-sm text-foreground">二进制文件</div>
           <div className="text-xs text-muted-foreground">
-            {formatBytes(doc.size)} · preview not supported
+            {formatBytes(doc.size)} · 不支持预览
           </div>
         </div>
       );
@@ -256,9 +256,9 @@ export const EditorPane = forwardRef<EditorPaneHandle, Props>(
     if (doc.status === "toolarge") {
       return (
         <div className="flex h-full flex-col items-center justify-center gap-1 px-6 text-center">
-          <div className="text-sm text-foreground">File too large</div>
+          <div className="text-sm text-foreground">文件过大</div>
           <div className="text-xs text-muted-foreground">
-            {formatBytes(doc.size)} exceeds the {formatBytes(doc.limit)} limit.
+            {formatBytes(doc.size)} 超过 {formatBytes(doc.limit)} 限制。
           </div>
         </div>
       );

@@ -86,7 +86,7 @@ export function Header({
 
   const shortcutLabel = useMemo(() => {
     const tokens = tokensFor("shortcuts.open");
-    return tokens ? `Keyboard shortcuts (${tokens})` : "Keyboard shortcuts";
+    return tokens ? `键盘快捷键 (${tokens})` : "键盘快捷键";
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [userShortcuts]);
 
@@ -122,7 +122,7 @@ export function Header({
       size="icon"
       className="size-7 shrink-0 rounded-md text-muted-foreground hover:bg-accent hover:text-foreground"
       onClick={onOpenSettings}
-      title="Settings"
+      title="设置"
     >
       <HugeiconsIcon icon={Settings01Icon} size={15} strokeWidth={1.75} />
     </Button>
@@ -139,7 +139,7 @@ export function Header({
       <div className="flex shrink-0 items-center gap-0.5">
         <Button
           onClick={onToggleSidebar}
-          title="Toggle sidebar"
+          title="切换侧边栏"
           variant="ghost"
           size="icon-sm"
           className="shrink-0 rounded-md text-muted-foreground hover:bg-accent hover:text-foreground"
@@ -153,7 +153,7 @@ export function Header({
               variant="ghost"
               size="icon-sm"
               className="shrink-0 rounded-md text-muted-foreground hover:bg-accent hover:text-foreground disabled:opacity-50"
-              title="Split terminal"
+              title="拆分终端"
               disabled={!canSplit}
             >
               <HugeiconsIcon icon={GridViewIcon} size={16} strokeWidth={1.75} />
@@ -166,7 +166,7 @@ export function Header({
                 size={14}
                 strokeWidth={1.75}
               />
-              <span className="flex-1">Split right</span>
+              <span className="flex-1">向右拆分</span>
               {splitRightTokens && (
                 <span className="text-xs text-muted-foreground">
                   {splitRightTokens}
@@ -179,7 +179,7 @@ export function Header({
                 size={14}
                 strokeWidth={1.75}
               />
-              <span className="flex-1">Split down</span>
+              <span className="flex-1">向下拆分</span>
               {splitDownTokens && (
                 <span className="text-xs text-muted-foreground">
                   {splitDownTokens}

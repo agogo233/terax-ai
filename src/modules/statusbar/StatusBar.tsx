@@ -50,12 +50,11 @@ export function StatusBar({
             <TooltipTrigger asChild>
               <span className="flex shrink-0 cursor-default items-center gap-1 rounded-full bg-amber-500/15 px-2 py-0.5 text-[10.5px] font-medium text-amber-700 dark:text-amber-400">
                 <HugeiconsIcon icon={IncognitoIcon} size={11} strokeWidth={2} />
-                <span>Private: hidden from AI</span>
+                <span>隐私模式：对 AI 隐藏</span>
               </span>
             </TooltipTrigger>
             <TooltipContent side="top" className="max-w-64 text-[11px] leading-relaxed">
-              AI can't see this terminal's output. Use it for secrets, SSH, or
-              anything you don't want sent to the model.
+              AI 无法看到此终端的输出。可用于隐藏敏感信息、SSH 会话或其他不想发送给模型的内容。
             </TooltipContent>
           </Tooltip>
         ) : null}

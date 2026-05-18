@@ -84,8 +84,7 @@ export const PreviewPane = forwardRef<PreviewPaneHandle, Props>(
               className="shrink-0"
             />
             <span className="truncate">
-              Many public sites refuse to embed (X-Frame-Options). If the page
-              is blank, open it externally.
+              许多公共网站拒绝嵌入（X-Frame-Options）。如果页面为空白，请在外部打开它。
             </span>
           </div>
         ) : null}
@@ -101,7 +100,7 @@ export const PreviewPane = forwardRef<PreviewPaneHandle, Props>(
               <iframe
                 key={`${url}#${nonce}`}
                 src={url}
-                title="Preview"
+                title="预览"
                 className="h-full w-full border-0"
                 allow="clipboard-read; clipboard-write; fullscreen"
               />
@@ -130,10 +129,10 @@ function SuspendedState({ onReload }: { onReload: () => void }) {
       </div>
       <div className="space-y-1">
         <p className="text-[12.5px] font-medium text-foreground">
-          Preview suspended
+          预览已暂停
         </p>
         <p className="max-w-xs text-[11px] leading-relaxed text-muted-foreground">
-          Released to free memory after sitting in the background.
+          在后台停留后释放以节省内存。
         </p>
       </div>
       <button
@@ -141,7 +140,7 @@ function SuspendedState({ onReload }: { onReload: () => void }) {
         onClick={onReload}
         className="rounded-md border border-border/60 bg-card px-3 py-1 text-[11px] hover:bg-accent/50"
       >
-        Reload
+        重新加载
       </button>
     </div>
   );
@@ -155,16 +154,14 @@ function EmptyState() {
       </div>
       <div className="space-y-1.5">
         <p className="text-sm font-medium text-foreground">
-          Nothing to preview yet
+          暂无预览内容
         </p>
         <p className="max-w-sm text-xs leading-relaxed text-muted-foreground">
-          Type a URL above, or open the{" "}
+          在上方输入 URL，或打开{" "}
           <span className="rounded bg-muted px-1 py-0.5 font-mono text-[10.5px]">
-            Ports
+            端口
           </span>{" "}
-          dropdown to jump straight to your running dev server. Public sites
-          often block embedding — open them in your browser via the link icon
-          if you see a blank page.
+          下拉菜单直接跳转到正在运行的开发服务器。公共网站通常会阻止嵌入——如果看到空白页面，请通过链接图标在浏览器中打开它们。
         </p>
       </div>
     </div>

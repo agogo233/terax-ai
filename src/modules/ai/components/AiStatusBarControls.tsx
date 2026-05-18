@@ -79,9 +79,9 @@ export function AiOpenButton({ onOpen }: { onOpen: () => void }) {
         "flex h-6 items-center gap-1.5 rounded-md border border-border/60 bg-card px-2 text-xs",
         "text-muted-foreground transition-colors hover:border-border hover:bg-accent hover:text-foreground",
       )}
-      title="Open AI agent"
+      title="打开 AI 智能体"
     >
-      <span>Open AI agent</span>
+      <span>打开 AI 智能体</span>
       <Kbd className="h-4 min-w-4 px-1">{fmtShortcut(MOD_KEY, "I")}</Kbd>
     </motion.button>
   );
@@ -109,7 +109,7 @@ export function AiStatusBarControls() {
       />
 
       <IconBtn
-        title="Attach file or image"
+        title="附加文件或图片"
         onClick={() => fileInputRef.current?.click()}
         disabled={c.isBusy}
       >
@@ -120,12 +120,12 @@ export function AiStatusBarControls() {
         <IconBtn
           title={
             !c.voice.hasKey
-              ? "Voice needs an OpenAI key"
+              ? "语音输入需要 OpenAI 密钥"
               : c.voice.recording
-                ? "Stop & transcribe"
+                ? "停止并转录"
                 : c.voice.transcribing
-                  ? "Transcribing…"
-                  : "Voice input"
+                  ? "正在转录…"
+                  : "语音输入"
           }
           onClick={() =>
             c.voice.recording ? c.voice.stop() : void c.voice.start()
@@ -151,10 +151,10 @@ export function AiStatusBarControls() {
       <span className="mx-1 h-8 w-px bg-border" aria-hidden />
       <Button
         onClick={closePanel}
-        title="Close AI panel"
+        title="关闭 AI 面板"
         size="xs"
         variant="ghost"
-        aria-label="Close AI panel"
+        aria-label="关闭 AI 面板"
         className="text-[11px] text-foreground/85 px-1"
       >
         <Kbd className="h-4 gap-px px-2 font-mono text-[11px]">
@@ -162,7 +162,7 @@ export function AiStatusBarControls() {
         </Kbd>
       </Button>
       <IconBtn
-        title={miniOpen ? "Mini-window open" : "Open conversation"}
+        title={miniOpen ? "迷你窗口已打开" : "打开对话"}
         onClick={openMini}
         disabled={miniOpen}
       >
@@ -176,8 +176,8 @@ export function AiStatusBarControls() {
           variant="ghost"
           onClick={c.stop}
           className="size-6"
-          aria-label="Stop"
-          title="Stop"
+          aria-label="停止"
+          title="停止"
         >
           <HugeiconsIcon icon={StopCircleIcon} size={13} strokeWidth={1.75} />
         </Button>
@@ -188,8 +188,8 @@ export function AiStatusBarControls() {
           onClick={c.submit}
           disabled={!c.canSend}
           className="h-5.5 w-7.5 ml-1"
-          aria-label="Send"
-          title="Send (Enter)"
+          aria-label="发送"
+          title="发送 (Enter)"
         >
           <HugeiconsIcon icon={ArrowUpIcon} size={13} strokeWidth={1.75} />
         </Button>
@@ -305,7 +305,7 @@ function ModelDropdown() {
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             onKeyDown={(e) => e.stopPropagation()}
-            placeholder="Search models, providers, capabilities…"
+            placeholder="搜索模型、提供商、功能…"
             className="w-full bg-transparent text-xs outline-none placeholder:text-muted-foreground/60"
           />
         </div>
@@ -313,20 +313,20 @@ function ModelDropdown() {
         {/* Tabs */}
         <div className="flex items-center gap-0.5 border-b border-border/70 px-2 py-1.5">
           <TabButton
-            label="All"
+            label="全部"
             icon={AiBookIcon}
             active={tab === "all"}
             onClick={() => setTab("all")}
           />
           <TabButton
-            label="Favorites"
+            label="收藏"
             icon={FavouriteIcon}
             active={tab === "favorites"}
             onClick={() => setTab("favorites")}
             count={favoriteIds.length || undefined}
           />
           <TabButton
-            label="Recent"
+            label="最近"
             icon={Clock01Icon}
             active={tab === "recent"}
             onClick={() => setTab("recent")}
@@ -339,7 +339,7 @@ function ModelDropdown() {
           <div className="flex w-11 flex-col gap-0.5 border-r border-border/70 bg-muted/20 py-1.5">
             <ProviderPill
               icon={AiBookIcon}
-              title="All providers"
+              title="所有提供商"
               active={activeProvider === null}
               onClick={() => setActiveProvider(null)}
             />
@@ -351,7 +351,7 @@ function ModelDropdown() {
                   title={
                     hasKeyFor(p.id)
                       ? p.label
-                      : `${p.label} — not configured`
+                      : `${p.label} — 未配置`
                   }
                   active={activeProvider === p.id}
                   muted={!hasKeyFor(p.id)}
@@ -372,10 +372,10 @@ function ModelDropdown() {
             {filtered.length === 0 ? (
               <div className="flex items-center justify-center px-4 py-10 text-xs text-muted-foreground/70">
                 {tab === "favorites"
-                  ? "No favorites yet — star a model to pin it here."
+                  ? "暂无收藏——收藏一个模型以将其固定在此处。"
                   : tab === "recent"
-                    ? "No recently-used models."
-                    : "No models match."}
+                    ? "暂无最近使用的模型。"
+                    : "没有匹配的模型。"}
               </div>
             ) : (
               filtered.map((m) => (
@@ -497,10 +497,10 @@ function ProviderConfigureCTA({ providerId }: { providerId: ProviderId }) {
     >
       <HugeiconsIcon icon={Settings01Icon} size={13} strokeWidth={1.75} />
       <span className="flex-1 truncate">
-        Configure {p.label} to use these models.
+        配置 {p.label} 以使用这些模型。
       </span>
       <span className="shrink-0 text-[10px] underline-offset-2 group-hover:underline">
-        Open
+        打开
       </span>
     </button>
   );
@@ -542,7 +542,7 @@ function ModelRow({
           e.stopPropagation();
           onToggleFavorite();
         }}
-        title={favorite ? "Unfavorite" : "Favorite"}
+        title={favorite ? "取消收藏" : "收藏"}
         className={cn(
           "shrink-0 rounded p-0.5 transition-colors",
           favorite
@@ -593,12 +593,12 @@ function ModelRow({
 function CapabilityBars({ caps }: { caps: ModelCapabilities }) {
   return (
     <div className="ml-auto flex items-center gap-1.5">
-      <CapBar icon={BrainIcon} value={caps.intelligence} label="Intelligence" />
-      <CapBar icon={FlashIcon} value={caps.speed} label="Speed" />
+      <CapBar icon={BrainIcon}     value={caps.intelligence} label="智能" />
+      <CapBar icon={FlashIcon} value={caps.speed} label="速度" />
       <CapBar
         icon={CoinsDollarIcon}
         value={caps.cost}
-        label="Affordability"
+        label="性价比"
       />
     </div>
   );

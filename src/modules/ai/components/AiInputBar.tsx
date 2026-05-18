@@ -286,7 +286,7 @@ export function AiInputBar() {
                     c.submit();
                   }
                 }}
-                placeholder="Ask Terax anything   -   # for snippets and commands, @ for files"
+                placeholder="询问 Terax   -   使用 # 插入代码片段和命令，使用 @ 插入文件"
                 rows={1}
                 disabled={c.isBusy}
                 className={cn(
@@ -489,12 +489,11 @@ export function AiInputBarConnect({ onAdd }: { onAdd: () => void }) {
     <div className="shrink-0 border-t border-border/60 bg-card/40 px-3 py-2">
       <div className="flex h-10 items-center justify-between gap-3 rounded-lg px-3 text-xs">
         <span className="text-muted-foreground">
-          Connect any AI provider (or use local models) - your key stays in your
-          OS keychain.
+          连接任何 AI 提供商（或使用本地模型）——您的密钥保存在您的操作系统密钥链中。
         </span>
         <Button size="xs" onClick={onAdd}>
           <HugeiconsIcon icon={Key01Icon} />
-          Connect provider
+          连接提供商
         </Button>
       </div>
     </div>

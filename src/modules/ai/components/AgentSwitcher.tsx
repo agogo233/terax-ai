@@ -71,7 +71,7 @@ export function AgentSwitcher({ isMiniWindow }: { isMiniWindow?: boolean }) {
       </DropdownMenuTrigger>
       <DropdownMenuContent align="start" className="min-w-60">
         <div className="px-2 pt-1.5 pb-1 text-[10px] font-medium tracking-wide text-muted-foreground uppercase">
-          Built-in
+          内置
         </div>
         {builtIn.map((a) => {
           const Icon = ICONS[a.icon] ?? SparklesIcon;
@@ -116,7 +116,7 @@ export function AgentSwitcher({ isMiniWindow }: { isMiniWindow?: boolean }) {
           <>
             <DropdownMenuSeparator />
             <div className="px-2 pt-1 pb-1 text-[10px] font-medium tracking-wide text-muted-foreground uppercase">
-              Custom
+              自定义
             </div>
             {custom.map((a) => {
               const Icon = ICONS[a.icon] ?? SparklesIcon;
@@ -162,7 +162,7 @@ export function AgentSwitcher({ isMiniWindow }: { isMiniWindow?: boolean }) {
           className="gap-2 text-[12px] text-muted-foreground"
         >
           <HugeiconsIcon icon={Settings01Icon} size={12} strokeWidth={1.75} />
-          Manage agents…
+          管理智能体…
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

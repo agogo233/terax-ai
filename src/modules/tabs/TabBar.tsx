@@ -149,7 +149,7 @@ export function TabBar({
               variant="ghost"
               size="icon"
               className="size-7 shrink-0 rounded-md text-muted-foreground hover:bg-accent hover:text-foreground"
-              title="New tab"
+              title="新建标签页"
             >
               <HugeiconsIcon icon={PlusSignIcon} size={14} strokeWidth={2} />
             </Button>
@@ -161,7 +161,7 @@ export function TabBar({
                 size={14}
                 strokeWidth={1.75}
               />
-              <span className="flex-1">Terminal</span>
+              <span className="flex-1">终端</span>
               <span className="text-xs text-muted-foreground">
                 {fmtShortcut(MOD_KEY, "T")}
               </span>
@@ -172,7 +172,7 @@ export function TabBar({
                 size={14}
                 strokeWidth={1.75}
               />
-              <span className="flex-1">Privacy</span>
+              <span className="flex-1">隐私模式</span>
               <span className="text-xs text-muted-foreground">
                 {fmtShortcut(MOD_KEY, "R")}
               </span>
@@ -183,14 +183,14 @@ export function TabBar({
                 size={14}
                 strokeWidth={1.75}
               />
-              <span className="flex-1">Editor</span>
+              <span className="flex-1">编辑器</span>
               <span className="text-xs text-muted-foreground">
                 {fmtShortcut(MOD_KEY, "E")}
               </span>
             </DropdownMenuItem>
             <DropdownMenuItem onSelect={() => onNewPreview()}>
               <HugeiconsIcon icon={Globe02Icon} size={14} strokeWidth={1.75} />
-              <span className="flex-1">Preview</span>
+              <span className="flex-1">预览</span>
               <span className="text-xs text-muted-foreground">
                 {fmtShortcut(MOD_KEY, "P")}
               </span>

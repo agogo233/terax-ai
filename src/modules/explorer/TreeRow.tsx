@@ -225,7 +225,7 @@ export function PendingRow({ depth, kind, onCommit, onCancel }: PendingRowProps)
       />
       <InlineInput
         initial=""
-        placeholder={kind === "dir" ? "New folder" : "New file"}
+        placeholder={kind === "dir" ? "新建文件夹" : "新建文件"}
         onCommit={onCommit}
         onCancel={onCancel}
       />

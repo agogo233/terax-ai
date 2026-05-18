@@ -48,9 +48,9 @@ const APPEARANCE: {
   label: string;
   icon: typeof ComputerIcon;
 }[] = [
-  { id: "system", label: "System", icon: ComputerIcon },
-  { id: "light", label: "Light", icon: Sun03Icon },
-  { id: "dark", label: "Dark", icon: Moon02Icon },
+  { id: "system", label: "系统", icon: ComputerIcon },
+  { id: "light", label: "浅色", icon: Sun03Icon },
+  { id: "dark", label: "深色", icon: Moon02Icon },
 ];
 
 export function GeneralSection() {
@@ -108,12 +108,12 @@ export function GeneralSection() {
   return (
     <div className="flex flex-col gap-6">
       <SectionHeader
-        title="General"
-        description="Appearance, editor, and startup."
+        title="通用"
+        description="外观、编辑器和启动设置。"
       />
 
       <div className="flex flex-col gap-2">
-        <Label>Appearance</Label>
+        <Label>外观</Label>
         <div className="grid grid-cols-3 gap-2">
           {APPEARANCE.map((o) => (
             <button
@@ -135,7 +135,7 @@ export function GeneralSection() {
       </div>
 
       <div className="flex flex-col gap-2">
-        <Label>Editor theme</Label>
+        <Label>编辑器主题</Label>
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button
@@ -167,8 +167,8 @@ export function GeneralSection() {
           </DropdownMenuContent>
         </DropdownMenu>
         <SettingRow
-          title="Vim mode"
-          description="Enable Vim keybindings in the code editor."
+          title="Vim 模式"
+          description="在代码编辑器中启用 Vim 键绑定。"
         >
           <Switch
             checked={vimMode}
@@ -178,10 +178,10 @@ export function GeneralSection() {
       </div>
 
       <div className="flex flex-col gap-2">
-        <Label>Explorer</Label>
+        <Label>文件浏览器</Label>
         <SettingRow
-          title="Show hidden files"
-          description="Include dot-prefixed files and folders (.env, .gitignore, .config) in the file explorer and search."
+          title="显示隐藏文件"
+          description="在文件浏览器和搜索中包含以点开头的文件和文件夹（.env、.gitignore、.config）。"
         >
           <Switch
             checked={showHidden}
@@ -191,11 +191,11 @@ export function GeneralSection() {
       </div>
 
       <div className="flex flex-col gap-2">
-        <Label>Terminal</Label>
+        <Label>终端</Label>
         <SettingRow
           title={
             <span className="inline-flex items-center gap-1.5">
-              Use WebGL renderer
+              使用 WebGL 渲染器
               <TooltipProvider delayDuration={200}>
                 <Tooltip>
                   <TooltipTrigger asChild>
@@ -207,13 +207,13 @@ export function GeneralSection() {
                     </span>
                   </TooltipTrigger>
                   <TooltipContent side="top" className="max-w-[260px] text-[11px]">
-                    xterm's WebGL renderer caches glyphs in a GPU texture atlas. On some macOS setups (especially with Nerd Fonts), the atlas corrupts and terminal text becomes unreadable. Turn this off as a fallback — performance dips slightly, but text renders correctly via the DOM renderer.
+                    xterm 的 WebGL 渲染器将字形缓存到 GPU 纹理图集中。在某些 macOS 设置上（尤其是使用 Nerd Fonts 时），图集会损坏导致终端文本无法阅读。关闭此选项作为备用方案——性能会略有下降，但文本会通过 DOM 渲染器正确渲染。
                   </TooltipContent>
                 </Tooltip>
               </TooltipProvider>
             </span>
           }
-          description="Hardware-accelerated rendering. Turn off if text shows corruption or blank tiles."
+          description="硬件加速渲染。如果文本显示损坏或空白块，请关闭此选项。"
         >
           <Switch
             checked={terminalWebglEnabled}
@@ -221,8 +221,8 @@ export function GeneralSection() {
           />
         </SettingRow>
         <SettingRow
-          title="Font size"
-          description="Terminal text size."
+          title="字体大小"
+          description="终端文本大小。"
         >
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
@@ -259,8 +259,8 @@ export function GeneralSection() {
           </DropdownMenu>
         </SettingRow>
         <SettingRow
-          title="Scrollback"
-          description="Lines of history kept per terminal. Higher uses more RAM (~3 KB / line)."
+          title="回滚行数"
+          description="每个终端保留的历史行数。设置越高占用越多内存（约 3 KB/行）。"
         >
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
@@ -299,11 +299,15 @@ export function GeneralSection() {
       </div>
 
       <div className="flex flex-col gap-2">
-        <Label>Startup</Label>
+        <Label>启动</Label>
         <div className="flex flex-col gap-2">
           <SettingRow
-            title="Launch at login"
-            description="Open Terax automatically when you sign in."
+            title="登录时启动"
+            description="登录时自动打开 Terax。"
+          >
+          <SettingRow
+            title="恢复窗口位置和大小"
+            description="重新打开主窗口时恢复到上次关闭时的位置。下次启动时生效。"
           >
             <Switch
               checked={autostart}
@@ -311,8 +315,8 @@ export function GeneralSection() {
             />
           </SettingRow>
           <SettingRow
-            title="Restore window position & size"
-            description="Reopen the main window where you left it. Applies on next launch."
+            title="恢复窗口位置和大小"
+            description="重新打开主窗口时恢复到上次关闭时的位置。下次启动时生效。"
           >
             <Switch
               checked={restoreWindowState}
