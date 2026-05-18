@@ -50,5 +50,5 @@ jobs:
           releaseBody: "Portable ZIP package for Windows x64."
           releaseDraft: true
           prerelease: false
-          args: --target x86_64-pc-windows-msvc
+          args: --target x86_64-pc-windows-msvc --bundles zip
           tauriScript: pnpm tauri
