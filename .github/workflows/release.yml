@@ -37,6 +37,10 @@ jobs:
       - name: Install frontend dependencies
         run: pnpm install --frozen-lockfile
 
+      - name: Update Cargo.lock
+        working-directory: ./src-tauri
+        run: cargo generate-lockfile
+
       - uses: tauri-apps/tauri-action@v0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
