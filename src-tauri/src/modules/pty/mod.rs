@@ -32,6 +32,21 @@ impl Default for PtyState {
     }
 }
 
+impl PtyState {
+    /// Synchronously kill and drop all PTY sessions. Called on app exit to
+    /// ensure no subprocesses survive the main process.
+    pub fn cleanup(&self) {
+        let sessions = std::mem::take(&mut *self.sessions.write().unwrap());
+        for (id, session) in &sessions {
+            if let Ok(mut k) = session.killer.lock() {
+                let _ = k.kill();
+            }
+            log::info!("pty session id={id} cleaned up on exit");
+        }
+        drop(sessions);
+    }
+}
+
 #[tauri::command]
 pub fn pty_open(
     state: tauri::State<PtyState>,

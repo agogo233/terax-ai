@@ -162,6 +162,20 @@ impl Default for ShellState {
     }
 }
 
+impl ShellState {
+    /// Kill all tracked background processes and clear all sessions.
+    /// Called on app exit to prevent orphaned child processes.
+    pub fn cleanup(&self) {
+        let bg = std::mem::take(&mut *self.bg.write().unwrap());
+        for (handle, proc) in &bg {
+            proc.kill();
+            log::info!("background process handle={handle} killed on exit");
+        }
+        drop(bg);
+        self.sessions.write().unwrap().clear();
+    }
+}
+
 #[tauri::command]
 pub fn shell_session_open(
     state: tauri::State<ShellState>,
@@ -256,7 +270,7 @@ pub fn shell_bg_logs(
 
 #[tauri::command]
 pub fn shell_bg_kill(state: tauri::State<ShellState>, handle: u32) -> Result<(), String> {
-    if let Some(proc) = state.bg.read().unwrap().get(&handle).cloned() {
+    if let Some(proc) = state.bg.write().unwrap().remove(&handle) {
         proc.kill();
     }
     Ok(())

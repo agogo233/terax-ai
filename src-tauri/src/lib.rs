@@ -1,7 +1,7 @@
 mod modules;
 
 use modules::{fs, git, net, pty, secrets, shell, workspace};
-use tauri::{Emitter, Manager, WebviewUrl, WebviewWindowBuilder};
+use tauri::{Emitter, Manager, RunEvent, WebviewUrl, WebviewWindowBuilder};
 use tauri_plugin_window_state::StateFlags;
 
 #[tauri::command]
@@ -146,6 +146,13 @@ pub fn run() {
             net::ai_http_request,
             net::ai_http_stream,
         ])
+        .on_event(|app, event| {
+            if let RunEvent::Exit = event {
+                log::info!("app exiting — cleaning up subprocesses");
+                app.state::<pty::PtyState>().cleanup();
+                app.state::<shell::ShellState>().cleanup();
+            }
+        })
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
 }
