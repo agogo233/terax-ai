@@ -58,9 +58,3 @@ jobs:
           name: Terax-portable-x64
           path: Terax-portable-x64.exe
           retention-days: 30
-
-      - name: Upload to release
-        run: |
-          gh release upload "Terax-${{ github.ref_name }}" "Terax-portable-x64.exe" --clobber
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
