@@ -316,6 +316,10 @@ export function useTerminalSession({
     return () => {
       cancelled = true;
       detachSession(leafId);
+      const s = sessions.get(leafId);
+      if (s && !s.disposed && s.pty) {
+        s.pty.close().catch(console.error);
+      }
     };
   }, [leafId, container, initialCwd]);
 
