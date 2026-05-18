@@ -2,8 +2,8 @@ name: Release
 
 on:
   push:
-    branches:
-      - main
+    tags:
+      - 'v*'
   workflow_dispatch:
 
 jobs:
@@ -21,7 +21,7 @@ jobs:
 
       - uses: actions/setup-node@v6
         with:
-          node-version: 24
+          node-version: 22
           cache: pnpm
 
       - name: Install Rust stable
@@ -41,32 +41,16 @@ jobs:
       - name: Install frontend dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Update Cargo.lock before build
-        working-directory: ./src-tauri
-        run: cargo update --workspace
-
       - uses: tauri-apps/tauri-action@v0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tagName: Terax-${{ github.sha }}
-          releaseName: "Terax ${{ github.sha }}"
-          releaseBody: "Portable ZIP package for Windows x64."
-          releaseDraft: true
-          prerelease: false
-          args: --target x86_64-pc-windows-msvc
           tauriScript: pnpm tauri
+          args: --target x86_64-pc-windows-msvc
 
-      - name: Extract exe from NSIS bundle
+      - name: Copy portable exe
         run: |
-          $exePath = Get-ChildItem -Path "src-tauri/target/x86_64-pc-windows-msvc/release/bundle/nsis" -Filter "*.exe" | Select-Object -First 1
-          if ($exePath) {
-            Write-Host "Found: $($exePath.FullName)"
-            Copy-Item $exePath.FullName -Destination "Terax-portable-x64.exe"
-          } else {
-            Write-Error "No .exe found in NSIS bundle directory"
-            exit 1
-          }
+          Copy-Item "src-tauri/target/x86_64-pc-windows-msvc/release/terax.exe" -Destination "Terax-portable-x64.exe"
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
@@ -75,17 +59,8 @@ jobs:
           path: Terax-portable-x64.exe
           retention-days: 30
 
-      - name: Upload portable EXE to release
+      - name: Upload to release
         run: |
-          gh release upload "Terax-${{ github.sha }}" "Terax-portable-x64.exe" --clobber
+          gh release upload "Terax-${{ github.ref_name }}" "Terax-portable-x64.exe" --clobber
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Commit updated Cargo.lock
-        if: always()
-        run: |
-          git config --local user.email "github-actions[bot]@users.noreply.github.com"
-          git config --local user.name "github-actions[bot]"
-          git add src-tauri/Cargo.lock
-          git commit -m "chore: update Cargo.lock" || echo "No changes to commit"
-          git push
