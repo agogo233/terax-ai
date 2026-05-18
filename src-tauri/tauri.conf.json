@@ -29,7 +29,11 @@
   },
   "bundle": {
     "active": true,
-    "targets": null,
+    "targets": {
+      "windows": {
+        "x86_64": ["zip"]
+      }
+    },
     "createUpdaterArtifacts": false,
     "icon": [
       "icons/32x32.png",
