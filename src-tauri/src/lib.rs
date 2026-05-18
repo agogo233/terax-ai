@@ -146,13 +146,13 @@ pub fn run() {
             net::ai_http_request,
             net::ai_http_stream,
         ])
-        .on_event(|app, event| {
+        .build(tauri::generate_context!())
+        .expect("error while building tauri application")
+        .run(|app_handle, event| {
             if let RunEvent::Exit = event {
                 log::info!("app exiting — cleaning up subprocesses");
-                app.state::<pty::PtyState>().cleanup();
-                app.state::<shell::ShellState>().cleanup();
+                app_handle.state::<pty::PtyState>().cleanup();
+                app_handle.state::<shell::ShellState>().cleanup();
             }
-        })
-        .run(tauri::generate_context!())
-        .expect("error while running tauri application");
+        });
 }
